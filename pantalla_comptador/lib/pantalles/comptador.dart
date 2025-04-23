@@ -28,7 +28,7 @@ class _ComptadorState extends State<Comptador> {
               )
             ),
             Text(
-              'Clics',
+              'Clic${contadorClics == 1 ? '':'s'}',
               style: const TextStyle(
                 fontSize: 160,
                 fontWeight: FontWeight.w100
