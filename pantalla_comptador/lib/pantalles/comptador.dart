@@ -10,11 +10,29 @@ class Comptador extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Text('10'),
-            Text('Clics')
+            Text(
+              '10',
+              style: TextStyle(
+                fontSize: 160,
+                fontWeight: FontWeight.w100
+              )
+            ),
+            Text(
+              'Clics',
+              style: TextStyle(
+                fontSize: 160,
+                fontWeight: FontWeight.w100
+              )
+            )
           ],
         ),
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          
+        },
+        child: const Icon(Icons.plus_one),
+      ),
     );
   }
 }
