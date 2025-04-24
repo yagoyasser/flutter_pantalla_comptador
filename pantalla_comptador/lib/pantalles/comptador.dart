@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class Comptador extends StatefulWidget {
   const Comptador({super.key});
@@ -82,8 +81,7 @@ class _ComptadorState extends State<Comptador> {
           BotonsInferiors(
             icona: Icons.exposure_minus_1_outlined,
             alPremer: () {
-              if (comptadorClics == 0)
-                return;
+              if (comptadorClics == 0) return;
               setState(() {
                 comptadorClics--;
               });
