@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class Comptador extends StatefulWidget {
   const Comptador({super.key});
@@ -8,7 +9,7 @@ class Comptador extends StatefulWidget {
 }
 
 class _ComptadorState extends State<Comptador> {
-  int contadorClics = 0;
+  int comptadorClics = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class _ComptadorState extends State<Comptador> {
         leading: IconButton(
           onPressed: () {
             setState(() {
-              contadorClics = 0;
+              comptadorClics = 0;
             });
           },
           icon: Icon(Icons.refresh_rounded),
@@ -27,7 +28,7 @@ class _ComptadorState extends State<Comptador> {
           IconButton(
             onPressed: () {
               setState(() {
-                contadorClics = 0;
+                comptadorClics = 0;
               });
             },
             icon: Icon(Icons.refresh_rounded),
@@ -39,14 +40,15 @@ class _ComptadorState extends State<Comptador> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              contadorClics.toString(),
+              comptadorClics.toString(),
               style: const TextStyle(
                 fontSize: 160,
                 fontWeight: FontWeight.w100,
               ),
             ),
 
-            if (contadorClics == 1 || contadorClics == -1)
+            // Text('Clic${compatdorClics == 1 || compatdorClics == -1}? '': 's'}', style: const TextStyle(fontSize: 160, fontWeight: FontWeight.w100,),)
+            if (comptadorClics == 1 || comptadorClics == -1)
               Text(
                 'Clic',
                 style: const TextStyle(
@@ -54,8 +56,7 @@ class _ComptadorState extends State<Comptador> {
                   fontWeight: FontWeight.w100,
                 ),
               ),
-
-            if (contadorClics != 1 && contadorClics != -1)
+            if (comptadorClics != 1 && comptadorClics != -1)
               Text(
                 'Clics',
                 style: const TextStyle(
@@ -69,30 +70,56 @@ class _ComptadorState extends State<Comptador> {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          FloatingActionButton(
-            onPressed: () {
-              setState(
-                () {
-                  contadorClics++;
-                },
-              );
+          BotonsInferiors(
+            icona: Icons.plus_one,
+            alPremer: () {
+              setState(() {
+                comptadorClics++;
+              });
             },
-            child: const Icon(Icons.plus_one),
           ),
-          SizedBox(height: 10),
-          FloatingActionButton(
-            shape: const StadiumBorder(), // Canvia la forma del botó a una circular
-            onPressed: () {
-              setState(
-                () {
-                  contadorClics--;
-                },
-              ); 
+          SizedBox(height: 10,),
+          BotonsInferiors(
+            icona: Icons.exposure_minus_1_outlined,
+            alPremer: () {
+              if (comptadorClics == 0)
+                return;
+              setState(() {
+                comptadorClics--;
+              });
             },
-            child: const Icon(Icons.exposure_minus_1_outlined),
+          ),
+          SizedBox(height: 10,),
+          BotonsInferiors(
+            icona: Icons.refresh_rounded,
+            alPremer: () {
+              setState(() {
+                comptadorClics = 0;
+              });
+            },
           ),
         ],
       ),
+    );
+  }
+}
+
+class BotonsInferiors extends StatelessWidget {
+  final IconData icona;
+  final VoidCallback? alPremer;
+  
+  const BotonsInferiors({
+    super.key,
+    required this.icona,
+    this.alPremer,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      // shape: const StadiumBorder(),
+      onPressed: alPremer,
+      child: Icon(icona),
     );
   }
 }
